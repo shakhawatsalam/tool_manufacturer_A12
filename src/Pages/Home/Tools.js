@@ -6,11 +6,11 @@ const Tools = () => {
 
 
     useEffect(() => {
-        fetch(`data.json`)
+        fetch(`http://localhost:5000/tools`)
             .then(res => res.json())
             .then(data => setTools(data));
-        
-    },[])
+
+    }, [])
     return (
         <div>
             <h1 className='text-6xl mt-5 text-center font-semibold'>Tools/Parts</h1>

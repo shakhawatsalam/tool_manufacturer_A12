@@ -1,0 +1,30 @@
+[
+    {
+        "id": "623de11b7b5c08494fca9f32",
+        "name": "Cosmetic Dentistry",
+        "price": "$250",
+        "minimum-order-quantity": "1000",
+        "available-quantit": "2000",
+        "description": "Cosmetic dentistry services are increasing in popularity and, as a result, provide a great opportunity for dental practices to grow their customer base.",
+        "picture": "https://images.pexels.com/photos/3779705/pexels-photo-3779705.jpeg"
+      },
+    {
+      "id": "623de11b7b5c08494fca9f42",
+      "name": "Endodontic procedures",
+      "price": "$350",
+      "minimum-order-quantity": "1000",
+      "available-quantit": "2000",
+      "description": "Endodontic procedures refer to painless root canal therapy. Typically, when the interior of a patient’s tooth becomes infected, damaged, or diseased, general dentists will refer them to an endodontist. ",
+      "picture": "https://images.pexels.com/photos/3779709/pexels-photo-3779709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "id": "623de11be6f7718d08221d5f",
+      "name": "Pediatric dental services",
+      "price": "$400",
+      "minimum-order-quantity": "1000",
+      "available-quantit": "2000",
+      "description": "If there are a lot of young people in the area that your practice serves, it could be beneficial to have a pediatric dental specialist on-staff",
+      "picture": "https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    }
+
+]

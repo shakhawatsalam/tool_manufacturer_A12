@@ -5,6 +5,9 @@ import Purchase from './Pages/Purchase/Purchase';
 import Login from './Shared/Login';
 import Register from './Shared/Register';
 import RequireAuth from './Shared/RequireAuth';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -22,6 +25,7 @@ function App() {
         }></Route>
 
       </Routes>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

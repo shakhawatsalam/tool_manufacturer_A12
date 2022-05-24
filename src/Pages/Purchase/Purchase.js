@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import Footer from '../../Shared/Footer';
 import NavBar from '../../Shared/NavBar';
@@ -26,6 +27,8 @@ const Purchase = () => {
     const minus = () => {
         setNumber(number - 100);
     }
+
+    // handleOnSubmit
     const handleSubmit = event => {
         event.preventDefault();
         const order = {
@@ -38,6 +41,11 @@ const Purchase = () => {
         }
         console.log(order);
     }
+
+        //showing error message
+        // if (number > parseInt(minimum_order_quantity)) {
+        //     toast.error(`You Can not order minimum ${minimum_order_quantity} And maximun ${available_quantity}`)
+        // }
     return (
         <div>
             <NavBar></NavBar>
@@ -59,14 +67,14 @@ const Purchase = () => {
                 <h1 className='text-center text-2xl mt-9' >How Much Quantity Do You Order?</h1>
                 <div className='flex justify-center mt-8'>
                     {
-                        number > parseInt(minimum_order_quantity) ? <button className='btn text-2xl' onClick={minus}>-</button>
+                        number >= parseInt(minimum_order_quantity) ? <button className='btn text-2xl' onClick={minus}>-</button>
                             :
                             <button className='btn text-2xl' disabled onClick={minus}>-</button>
                     }
 
                     <input type="number" value={number} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
                     {
-                        number < parseInt(available_quantity) ? <button className='btn text-2xl' onClick={plus}>+</button>
+                        number <= parseInt(available_quantity) ? <button className='btn text-2xl' onClick={plus}>+</button>
                             : <button className='btn text-2xl' disabled onClick={plus}>+</button>
                     }
 
@@ -79,7 +87,16 @@ const Purchase = () => {
                         <input type="text" name='product' readOnly disabled value={name} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
                         <input type="text" name='address' placeholder="address" class="input input-bordered w-full max-w-xs" />
                         <input type="tel" name='phone' placeholder="+008" class="input input-bordered w-full max-w-xs" />
-                        <input type="submit" className='btn' value="Purchase" />
+                        {
+                             number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity)  ?
+                                '' :
+                               <p className='text-red-500'><small>You Can not order minimum {minimum_order_quantity} And maximun {available_quantity}</small></p>
+                        }
+                        {
+                             number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity)  ?
+                                <input type="submit"  className='btn' value="Purchase" /> :
+                                <input type="submit" disabled className='btn' value="Purchase" />
+                        }
                     </form>
                 </div>
             </div>

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from './Footer';
 import NavBar from './NavBar';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
 import { useForm } from 'react-hook-form';
+import useToken from '../Hooks/useToken';
+import Loading from './Loading';
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -17,9 +19,28 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    let singError;
+    let from = location.state?.from?.pathname || "/";
+    const [token] = useToken(user || gUser);
+    // hooks 
+
+    useEffect(() => {
+
+        if (token) {
+            navigate(from, { replace: true });
+            // console.log(user);
+        }
+    }, [user, gUser, from, navigate, token])
+    if (loading || gLoading) {
+        return <Loading />
+    }
+
+    if (error || gError) {
+        singError = <p className='text-red-500'><small>{error?.message || gError?.message}</small></p>
+    }
+
 
     const onSubmit = data => {
-        console.log(data)
         const email = data.email;
         const password = data.password;
         signInWithEmailAndPassword(email, password);
@@ -94,7 +115,7 @@ const Login = () => {
                                 </div>
 
                                 {/* error message  */}
-                                {/* {singError} */}
+                                {singError}
                                 <input className='btn w-full max-w-xs text-white' type="submit" value='Login' />
                             </form>
 

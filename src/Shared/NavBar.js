@@ -1,7 +1,19 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link} from 'react-router-dom';
+import auth from '../firebase.init';
+
+
+
 
 const NavBar = () => {
+    const [user] = useAuthState(auth);
+
+    const logOut = () => {
+        signOut(auth);
+        localStorage.removeItem('accessToken')
+    }
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -11,7 +23,12 @@ const NavBar = () => {
                     </label>
                     <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li><Link to={'/'}>Home</Link></li>
-                        <li><Link to={'/login'}>Login</Link></li>
+                        {
+                            user ?
+                                <li><button className='btn btn-link' onClick={logOut}>Sing out</button></li>
+                                :
+                                <li><Link to={'/login'}>Login</Link></li>
+                        }
                     </ul>
                 </div>
                 <Link to={'/'} className="btn btn-ghost normal-case text-xl">daisyUI</Link>
@@ -19,7 +36,12 @@ const NavBar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     <li><Link to={'/'}>Home</Link></li>
-                    <li><Link to={'/login'}>Login</Link></li>
+                    {
+                        user ?
+                            <li><button className='btn btn-link' onClick={logOut}>Sing out</button></li>
+                            :
+                            <li><Link to={'/login'}>Login</Link></li>
+                    }
                 </ul>
             </div>
         </div>

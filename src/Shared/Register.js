@@ -3,7 +3,9 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
+import useToken from '../Hooks/useToken';
 import Footer from './Footer';
+import Loading from './Loading';
 import NavBar from './NavBar';
 
 const Register = () => {
@@ -18,6 +20,23 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [token] = useToken(user || gUser);
+    // End of hooks
+
+    if (loading || gLoading || updating) {
+        return <Loading />
+    }
+    let registerError;
+    if (error || gError) {
+        registerError = <p className='text-red-500'><small>{error?.message || gError?.message || updateError?.message}</small></p>
+    }
+
+    if (token) {
+        navigate('/')
+        // console.log(user);
+        // navigate('/appointment');
+    }
 
 
 
@@ -124,7 +143,7 @@ const Register = () => {
                             </div>
 
                             {/* error message  */}
-                            {/* {singError} */}
+                            {registerError}
                             <input className='btn w-full max-w-xs text-white' type="submit" value='Register' />
                         </form>
 

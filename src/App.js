@@ -8,6 +8,10 @@ import RequireAuth from './Shared/RequireAuth';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from './Dashboard/Dashboard';
+import MyProfile from './Dashboard/MyProfile';
+import AddaReview from './Dashboard/AddaReview';
+import MyOrder from './Dashboard/MyOrder';
 
 function App() {
   return (
@@ -19,10 +23,19 @@ function App() {
         <Route path="register" element={<Register />}></Route>
         <Route path="purchase/:id" element={
           <RequireAuth>
-
             <Purchase />
           </RequireAuth>
         }></Route>
+        {/* nested routs  */}
+        <Route path="dashboard" element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }>
+          <Route index element={<MyProfile></MyProfile>}></Route>
+          <Route path='addreview' element={<AddaReview></AddaReview>}></Route>
+          <Route path='myorder/:email' element={<MyOrder></MyOrder>}></Route>
+        </Route>
 
       </Routes>
       <ToastContainer></ToastContainer>

@@ -1,3 +1,4 @@
+import { stringify } from '@firebase/util';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
@@ -37,9 +38,23 @@ const Purchase = () => {
             product: event.target.product.value,
             address: event.target.address.value,
             phone: event.target.phone.value,
-            quantity: number
-        }
-        console.log(order);
+            quantity: stringify(number) 
+        };
+        fetch('http://localhost:5000/order', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    toast.success(`Successfully Booked`);
+                }
+            });
+        event.target.reset('')
+       
     }
 
         //showing error message

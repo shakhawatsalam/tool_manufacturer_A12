@@ -14,6 +14,7 @@ import AddaReview from './Dashboard/AddaReview';
 import MyOrder from './Dashboard/MyOrder';
 import AllUsers from './Dashboard/AllUsers';
 import RequireAdmin from './Shared/RequireAdmin';
+import Payment from './Dashboard/Payment';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='addreview' element={<AddaReview></AddaReview>}></Route>
           <Route path='myorder/:email' element={<MyOrder></MyOrder>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
           <Route path='users' element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
         </Route>
 

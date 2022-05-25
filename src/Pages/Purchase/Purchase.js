@@ -38,7 +38,8 @@ const Purchase = () => {
             product: event.target.product.value,
             address: event.target.address.value,
             phone: event.target.phone.value,
-            quantity: stringify(number) 
+            price: price,
+            quantity: stringify(number)
         };
         fetch('http://localhost:5000/order', {
             method: 'POST',
@@ -73,7 +74,7 @@ const Purchase = () => {
                             <h1 className="text-5xl font-bold">{name}</h1>
                             <h1 className="text-3xl font-semibold mt-5">Minimum Order Quantity: {minimum_order_quantity}</h1>
                             <h1 className="text-3xl font-semibold mt-5">Available Quantity: {available_quantity}</h1>
-                            <h1 className="text-3xl font-semibold mt-5">Price: {price}</h1>
+                            <h1 className="text-3xl font-semibold mt-5">Price:${price}</h1>
                             <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                             <button className="btn btn-primary">Get Started</button>
                         </div>
@@ -100,8 +101,8 @@ const Purchase = () => {
                         <input type="text" name='name' readOnly disabled value={user.displayName} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
                         <input type="email" name='email' readOnly disabled value={user.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
                         <input type="text" name='product' readOnly disabled value={name} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" name='address' placeholder="address" class="input input-bordered w-full max-w-xs" />
-                        <input type="tel" name='phone' placeholder="+008" class="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='address' required placeholder="address" class="input input-bordered w-full max-w-xs" />
+                        <input type="tel" name='phone' required placeholder="+008" class="input input-bordered w-full max-w-xs" />
                         {
                              number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity)  ?
                                 '' :

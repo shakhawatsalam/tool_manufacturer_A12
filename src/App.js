@@ -15,6 +15,9 @@ import MyOrder from './Dashboard/MyOrder';
 import AllUsers from './Dashboard/AllUsers';
 import RequireAdmin from './Shared/RequireAdmin';
 import Payment from './Dashboard/Payment';
+import AddProduct from './Dashboard/AddProduct';
+import ManageAllOrder from './Dashboard/ManageAllOrder';
+import ManageProduct from './Dashboard/ManageProduct';
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
           <Route path='myorder/:email' element={<MyOrder></MyOrder>}></Route>
           <Route path='payment/:id' element={<Payment></Payment>}></Route>
           <Route path='users' element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
+          <Route path='addProduct' element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
+          <Route path='manageorder' element={<RequireAdmin><ManageAllOrder></ManageAllOrder></RequireAdmin>}></Route>
+          <Route path='manageproduct' element={<RequireAdmin><ManageProduct></ManageProduct></RequireAdmin>}></Route>
         </Route>
 
       </Routes>

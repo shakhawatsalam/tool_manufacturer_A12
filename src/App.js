@@ -13,6 +13,7 @@ import MyProfile from './Dashboard/MyProfile';
 import AddaReview from './Dashboard/AddaReview';
 import MyOrder from './Dashboard/MyOrder';
 import AllUsers from './Dashboard/AllUsers';
+import RequireAdmin from './Shared/RequireAdmin';
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
           <Route index element={<MyProfile></MyProfile>}></Route>
           <Route path='addreview' element={<AddaReview></AddaReview>}></Route>
           <Route path='myorder/:email' element={<MyOrder></MyOrder>}></Route>
-          <Route path='users' element={<AllUsers></AllUsers>}></Route>
+          <Route path='users' element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
         </Route>
 
       </Routes>

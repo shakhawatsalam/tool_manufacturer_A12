@@ -1,39 +1,27 @@
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import auth from '../firebase.init';
+import Loading from '../Shared/Loading'
+import DeleteModal from './DeleteModal';
+import OrderRow from './OrderRow';
 
 const MyOrder = () => {
     const [user] = useAuthState(auth);
-    const [orders, setOrders] = useState([]);
+    const [deletingOrder, setDeletingOrder] = useState(null);
+    // const [orders, setOrders] = useState([]);
+    const email = user?.email;
 
-
-    useEffect(() => {
-        const email = user?.email;
-        const url = `http://localhost:5000/order?email=${email}`
-
-        try {
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data?.length) {
-                        setOrders(data);
-                        console.log(data);
-                    }
-                    else if (data.error) {
-                        signOut(auth);
-
-                    }
-                })
-        } catch (error) {
+    const { data: orders, isLoading, refetch } = useQuery('doctors', () => fetch(`http://localhost:5000/order?email=${email}`, {
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
 
         }
-    }, [user?.email])
+    }).then(res => res.json()));
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div>
             <h1 className='text-center text-amber-500 text-3xl mt-5 font-semibold'>My Order</h1>
@@ -52,19 +40,24 @@ const MyOrder = () => {
                         </thead>
                         <tbody>
                             {
-                                orders.map((order, index) => <tr>
-                                    <th>{index + 1}</th>
-                                    <td>{order.name}</td>
-                                    <td>{order.email}</td>
-                                    <td>{order.product}</td>
-                                    <td>{order.quantity}</td>
-                                    <td><button class="btn btn-xs">DELETE</button></td>
-
-                                </tr>)
+                                orders.map((order, index) => <OrderRow
+                                    order={order}
+                                    key={order._id}
+                                    index={index}
+                                    refetch={refetch}
+                                    setDeletingOrder={setDeletingOrder}
+                                ></OrderRow>)
                             }
                         </tbody>
                     </table>
                 </div>
+                {
+                    deletingOrder && <DeleteModal
+                        deletingOrder={deletingOrder}
+                        refetch={refetch}
+                        setDeletingOrder={setDeletingOrder}
+                    ></DeleteModal>
+                }
             </div>
         </div>
     );

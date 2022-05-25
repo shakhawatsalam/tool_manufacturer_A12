@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 
 const CheckoutForm = ({ order }) => {
@@ -11,24 +12,25 @@ const CheckoutForm = ({ order }) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
-    const { price } = order;
+    const { price, name, email, _id, quantity, product } = order;
+    // console.log(order);
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
             method: 'POST',
             headers: {
-                'content-type' : 'application/json',
+                'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
 
             },
-            body: JSON.stringify({price})
+            body: JSON.stringify({ price })
 
         })
             .then(res => res.json())
             .then(data => {
                 if (data?.clientSecret) {
-                setClientSecret(data.clientSecret)
-            }
-        })
+                    setClientSecret(data.clientSecret)
+                }
+            })
     }, [price])
     //handel submin
     const handleSubmit = async (event) => {
@@ -51,8 +53,57 @@ const CheckoutForm = ({ order }) => {
 
 
         setCardError(error?.message || '');
+        setSuccess('');
+        setProcessing(true);
+        // confirm card payment
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: name,
+                        email: email
+                    },
+                },
+            },
+        );
+        if (intentError) {
+            setCardError(intentError?.message);
+            setProcessing(false);
+        }
+        else {
+            setCardError('');
+            setTransactionId(paymentIntent.id);
+            console.log(paymentIntent);
+            setSuccess('Your Payment is Completed');
+            // store payment on database
+            const payment = {
+                order: _id,
+                transactionId: paymentIntent.id,
+                name: name,
+                email: email,
+                price: price,
+                quantity: quantity,
+                product: product,
 
+            }
+            fetch(`http://localhost:5000/order/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
 
+                },
+                body: JSON.stringify(payment)
+
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setProcessing(false);
+                    console.log(data);
+                })
+        }
     }
     return (
         <>

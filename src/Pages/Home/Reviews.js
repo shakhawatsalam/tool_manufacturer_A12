@@ -18,8 +18,8 @@ const Reviews = () => {
         <div>
             <h1 className='text-6xl mt-10 text-center font-semibold'>Reviews</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center  gap-5'>
-                {
-                    reviews?.slice(-3).map(review => <Review
+                {reviews.length > 0 &&
+                    reviews?.map(review => <Review
                         key={review._id}
                         review={review}
 

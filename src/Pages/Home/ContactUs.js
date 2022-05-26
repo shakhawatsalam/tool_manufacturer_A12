@@ -6,7 +6,7 @@ const ContactUs = () => {
             <h1 className='text-6xl mt-5 text-center font-semibold'>Contact Us</h1>
             <p className='text-center text-4xl  font-thin'>Stay connected with us</p>
             <section style={{
-                backgroundImage: " url(https://i.ibb.co/n7Tqqm4/jamaal-cooks-X0t-Gwo-H7-Vq-U-unsplash.jpg)",
+                backgroundImage: " url(https://images.unsplash.com/photo-1489824904134-891ab64532f1?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=60&raw_url=true&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNhcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500)",
                 backgroundSize: "cover",
 
             }} className='px-10 py-14 mt-10 rounded-lg'>

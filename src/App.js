@@ -32,6 +32,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/blogs" element={<Blog />}></Route>
         <Route path="/myportfolio" element={<MyPorifolio />}></Route>
+        <Route path="/MyProfile" element={<MyProfile />}></Route>
         <Route path="/purchase/:id" element={
           <RequireAuth>
             <Purchase />

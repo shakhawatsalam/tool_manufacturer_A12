@@ -55,13 +55,13 @@ const Purchase = () => {
                 }
             });
         event.target.reset('')
-       
+
     }
 
-        //showing error message
-        // if (number > parseInt(minimum_order_quantity)) {
-        //     toast.error(`You Can not order minimum ${minimum_order_quantity} And maximun ${available_quantity}`)
-        // }
+    //showing error message
+    // if (number > parseInt(minimum_order_quantity)) {
+    //     toast.error(`You Can not order minimum ${minimum_order_quantity} And maximun ${available_quantity}`)
+    // }
     return (
         <div>
             <NavBar></NavBar>
@@ -88,7 +88,7 @@ const Purchase = () => {
                             <button className='btn text-2xl' disabled onClick={minus}>-</button>
                     }
 
-                    <input type="number" value={number} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                    <input type="number" value={number} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
                     {
                         number <= parseInt(available_quantity) ? <button className='btn text-2xl' onClick={plus}>+</button>
                             : <button className='btn text-2xl' disabled onClick={plus}>+</button>
@@ -97,20 +97,20 @@ const Purchase = () => {
                 </div>
                 <h1 className='text-center text-2xl mt-9'>Order Information</h1>
                 <div >
-                    <form  onSubmit={handleSubmit} className='grid grid-cols-1 justify-items-center gap-5 mt-10'>
-                        <input type="text" name='name' readOnly disabled value={user.displayName} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                        <input type="email" name='email' readOnly disabled value={user.email} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" name='product' readOnly disabled value={name} placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" name='address' required placeholder="address" class="input input-bordered w-full max-w-xs" />
-                        <input type="tel" name='phone' required placeholder="+008" class="input input-bordered w-full max-w-xs" />
+                    <form onSubmit={handleSubmit} className='grid grid-cols-1 justify-items-center gap-5 mt-10'>
+                        <input type="text" name='name' readOnly disabled value={user.displayName} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                        <input type="email" name='email' readOnly disabled value={user.email} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='product' readOnly disabled value={name} placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='address' required placeholder="address" className="input input-bordered w-full max-w-xs" />
+                        <input type="tel" name='phone' required placeholder="+008" className="input input-bordered w-full max-w-xs" />
                         {
-                             number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity)  ?
+                            number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity) ?
                                 '' :
-                               <p className='text-red-500'><small>You Can not order minimum {minimum_order_quantity} And maximun {available_quantity}</small></p>
+                                <p className='text-red-500'><small>You Can not order minimum {minimum_order_quantity} And maximun {available_quantity}</small></p>
                         }
                         {
-                             number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity)  ?
-                                <input type="submit"  className='btn' value="Purchase" /> :
+                            number >= parseInt(minimum_order_quantity) && number <= parseInt(available_quantity) ?
+                                <input type="submit" className='btn' value="Purchase" /> :
                                 <input type="submit" disabled className='btn' value="Purchase" />
                         }
                     </form>

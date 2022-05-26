@@ -26,8 +26,8 @@ const ManageProduct = () => {
     return (
         <div>
             <h1 className='text-center font-semibold text-3xl'>Manage Product{tools.length}</h1>
-            <div class="overflow-x-auto">
-                <table class="table table-compact w-full">
+            <div className="overflow-x-auto">
+                <table className="table table-compact w-full">
                     <thead>
                         <tr>
                             <th></th>
@@ -54,12 +54,12 @@ const ManageProduct = () => {
                 </table>
             </div>
             {
-                    deletingOrder && <DeleteProductModal
-                        deletingOrder={deletingOrder}
-                        refetch={refetch}
-                        setDeletingOrder={setDeletingOrder}
-                    ></DeleteProductModal>
-                }
+                deletingOrder && <DeleteProductModal
+                    deletingOrder={deletingOrder}
+                    refetch={refetch}
+                    setDeletingOrder={setDeletingOrder}
+                ></DeleteProductModal>
+            }
         </div>
     );
 };

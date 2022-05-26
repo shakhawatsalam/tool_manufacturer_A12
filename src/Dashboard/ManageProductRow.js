@@ -7,7 +7,7 @@ const ManageProductRow = ({ tool, index, setDeletingOrder }) => {
             <td>{tool.name}</td>
             <td>${tool.price}</td>
             <td>{tool.available_quantity}</td>
-            <td><label onClick={() => setDeletingOrder(tool)} for="delete-comfirm-modal" class="btn btn-xs btn-error">DELETE</label></td>
+            <td><label onClick={() => setDeletingOrder(tool)} for="delete-comfirm-modal" className="btn btn-xs btn-error">DELETE</label></td>
         </tr>
 
     );

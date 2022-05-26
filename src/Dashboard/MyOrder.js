@@ -13,7 +13,7 @@ const MyOrder = () => {
     // const [orders, setOrders] = useState([]);
     const email = user?.email;
 
-    const { data: orders, isLoading, refetch } = useQuery('order', () => fetch(`http://localhost:5000/order?email=${email}`, {
+    const { data: orders, isLoading, refetch } = useQuery('order', () => fetch(` https://tranquil-earth-71509.herokuapp.com/order?email=${email}`, {
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
 

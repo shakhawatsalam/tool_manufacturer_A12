@@ -15,7 +15,7 @@ const Purchase = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/tools/${id}`)
+        fetch(` https://tranquil-earth-71509.herokuapp.com/tools/${id}`)
             .then(res => res.json())
             .then(data => setDetails(data));
     }, [id]);
@@ -41,7 +41,7 @@ const Purchase = () => {
             price: price,
             quantity: stringify(number)
         };
-        fetch('http://localhost:5000/order', {
+        fetch(' https://tranquil-earth-71509.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

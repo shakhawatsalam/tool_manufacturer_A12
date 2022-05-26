@@ -7,7 +7,7 @@ import ManageProductRow from './ManageProductRow';
 const ManageProduct = () => {
     // const [tools, setTools] = useState([]);
     const [deletingOrder, setDeletingOrder] = useState(null);
-    const { data: tools, isLoading, refetch } = useQuery('tools', () => fetch(`http://localhost:5000/tools`, {
+    const { data: tools, isLoading, refetch } = useQuery('tools', () => fetch(` https://tranquil-earth-71509.herokuapp.com/tools`, {
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
 
@@ -17,12 +17,6 @@ const ManageProduct = () => {
         return <Loading></Loading>
     }
 
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/tools`)
-    //         .then(res => res.json())
-    //         .then(data => setTools(data));
-
-    // }, [])
     return (
         <div>
             <h1 className='text-center font-semibold text-3xl'>Manage Product{tools.length}</h1>

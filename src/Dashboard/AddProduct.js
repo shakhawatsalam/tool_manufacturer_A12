@@ -15,7 +15,7 @@ const AddProduct = () => {
             description: event.target.description.value,
             picture: event.target.picture.value
         };
-        fetch('http://localhost:5000/tools', {
+        fetch(' https://tranquil-earth-71509.herokuapp.com/tools', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

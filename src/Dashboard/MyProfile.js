@@ -15,7 +15,7 @@ const MyProfile = () => {
             location: event.target.location.value,
             phone: event.target.phone.value,
         };
-        fetch('http://localhost:5000/profile', {
+        fetch(' https://tranquil-earth-71509.herokuapp.com/profile', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

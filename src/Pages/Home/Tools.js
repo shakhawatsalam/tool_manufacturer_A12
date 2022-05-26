@@ -6,7 +6,7 @@ const Tools = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/tools`)
+        fetch(` https://tranquil-earth-71509.herokuapp.com/tools`)
             .then(res => res.json())
             .then(data => setTools(data));
 

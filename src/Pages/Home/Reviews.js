@@ -5,7 +5,12 @@ const Reviews = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        fetch(`reviews.json`)
+        fetch(`http://localhost:5000/reviews`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setReviews(data));
     }, [])
@@ -14,10 +19,10 @@ const Reviews = () => {
             <h1 className='text-6xl mt-10 text-center font-semibold'>Reviews</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-content-center  gap-5'>
                 {
-                    reviews.map(review => <Review
-                        key={review.id}
+                    reviews?.slice(-3).map(review => <Review
+                        key={review._id}
                         review={review}
-                    
+
                     ></Review>)
                 }
             </div>
